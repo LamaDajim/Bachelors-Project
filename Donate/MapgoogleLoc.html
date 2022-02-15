@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
+	<title>Find coor of any Location</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+	
+	
+  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBIeGgDvPJK4u8X3grUgQ6yG30ueUWqzms&sensor=false"></script>
+
+      <style type="text/css">
+          #backButton
+          {
+              width: 153px;
+          }
+      </style>
+ 
+  </head>
+  
+  <body>
+  <center>
+  <div id="map_canvas" style="width: 800px; height: 500px; border:1px solid black;"></div> 
+  <hr />
+  <input name="coords" id="coords" value=" " size="100" readonly> <hr>
+  <input name="map_url" id="map_url" value=" " size="100" readonly> <hr>
+  <a id="map_img" target="_blank" href="">Get Static Image for Map</a>
+  <hr />
+  <input type=button value=Back id="backButton" text="Back" OnClick="JavaScript:window.history.back(1);return false;" >
+  <hr />
+  </center>
+  <script type="text/javascript">
+  
+  
+	var map;
+	var zoom=7;
+
+	var lat = 18.216880995487298; //default latitude
+	var lng = 42.49999880981352; //default longitude
+	var homeLatlng = new google.maps.LatLng(lat, lng); //set default coordinates
+                   var homeLatlng1 = new google.maps.LatLng(lat, lng+0.01); //set default coordinates
+	
+	var myOptions = {
+	center: new google.maps.LatLng(lat, lng), //set map center
+	zoom: zoom, //set zoom level to 17
+	mapTypeId: google.maps.MapTypeId.ROADMAP //set map type to road map
+	};
+	
+	map = new google.maps.Map(document.getElementById("map_canvas"),
+	myOptions); //initialize the map
+	
+	var homeMarker = new google.maps.Marker({ //set marker
+	position: homeLatlng, //set marker position equal to the default coordinates
+	map: map, //set map to be used by the marker
+	draggable: true //make the marker draggable
+	});
+
+//  22222222222222222222222
+//    var homeMarker1 = new google.maps.Marker({ //set marker
+//	position: homeLatlng1, //set marker position equal to the default coordinates
+//	map: map, //set map to be used by the marker
+//	draggable: true //make the marker draggable
+//	});
+
+	
+	//if the position of the marker changes set latitude and longitude to
+	//current position of the marker
+	google.maps.event.addListener(homeMarker, 'position_changed', function(){
+	lat = homeMarker.getPosition().lat(); //set lat current latitude where the marker is plotted
+	lng = homeMarker.getPosition().lng(); //set lat current longitude where the marker is plotted
+	zoom = map.getZoom();
+	
+	document.getElementById('map_img').href="http://maps.google.com/maps/api/staticmap?center=" + lat + ',' + lng + "&zoom=" + zoom + "&size=600x400&maptype=roadmap&sensor=false&markers=color:red|label:none|" + lat + ',' + lng;
+	document.getElementById('coords').value = lat + "#" + lng; //"Lat: "+lat+"      ,      Long:"+lng;
+	document.getElementById('map_url').value="http://maps.google.com/?q="+lat+","+lng+"&z="+zoom;
+	});
+	
+	//if the center of the map has changed
+	google.maps.event.addListener(map, 'center_changed', function(){
+	lat = homeMarker.getPosition().lat(); //set lat to current latitude where the marker is plotted
+	lng = homeMarker.getPosition().lng(); //set lng current latitude where the marker is plotted
+	zoom = map.getZoom();
+	document.getElementById('map_img').href="http://maps.google.com/maps/api/staticmap?center=" + lat + ',' + lng + "&zoom=" + zoom + "&size=600x400&maptype=roadmap&sensor=false&markers=color:red|label:none|" + lat+ ',' + lng;
+	document.getElementById('coords').value = lat + "#" + lng; //"Lat: "+lat+"      ,      Long:"+lng;
+	document.getElementById('map_url').value="http://maps.google.com/?q="+lat+","+lng+"&z="+zoom;
+	});
+//--------------------------------
+//if the position of the marker changes set latitude and longitude to  2222222222
+//current position of the marker
+
+//	google.maps.event.addListener(homeMarker1, 'position_changed', function(){
+//	lat = homeMarker1.getPosition().lat(); //set lat current latitude where the marker is plotted
+//	lng = homeMarker1.getPosition().lng(); //set lat current longitude where the marker is plotted
+//	zoom = map.getZoom();
+//	
+//	document.getElementById('map_img').href="http://maps.google.com/maps/api/staticmap?center=" + lat + ',' + lng + "&zoom=" + zoom + "&size=600x400&maptype=roadmap&sensor=false&markers=color:red|label:none|" + lat + ',' + lng;
+//	document.getElementById('coords').value=lat+","+lng;
+//	document.getElementById('map_url').value="http://maps.google.com/?q="+lat+","+lng+"&z="+zoom;
+//	});
+	
+	//if the center of the map has changed 222222
+//	google.maps.event.addListener(map, 'center_changed', function(){
+//	lat = homeMarker1.getPosition().lat(); //set lat to current latitude where the marker is plotted
+//	lng = homeMarker1.getPosition().lng(); //set lng current latitude where the marker is plotted
+//	zoom = map.getZoom();
+//	document.getElementById('map_img').href="http://maps.google.com/maps/api/staticmap?center=" + lat + ',' + lng + "&zoom=" + zoom + "&size=600x400&maptype=roadmap&sensor=false&markers=color:red|label:none|" + lat+ ',' + lng;
+//	document.getElementById('coords').value=lat+","+lng;
+//	document.getElementById('map_url').value="http://maps.google.com/?q="+lat+","+lng+"&z="+zoom;
+//	});
+
+  </script>
+  
+  </body>
+  </html>

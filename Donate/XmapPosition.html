@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">    <meta charset="utf-8">
+    <title>Simple markers</title>
+    <style>
+      html, body, #map-canvas {        height: 100%;        margin: 0px;        padding: 0px      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    <script>
+	var lat=0;	var lan=0;	var marker;   var map;
+	//--------------------------------------------
+	function getLocation() {
+        if (navigator.geolocation) {navigator.geolocation.getCurrentPosition(showPosition, showError);} else { /*No Support*/ }
+    }
+	//--------------------------------------------
+	function showPosition(position) {
+        var lat =  position.coords.latitude ;
+		var lan =  position.coords.longitude;
+		marker.setPosition( new google.maps.LatLng( lat, lan ) );
+        map.panTo( new google.maps.LatLng( lat, lan  ) );
+        var latlon = "Your Latitude Position is:=" + position.coords.latitude + "," + "Your Longitude Position is:="  +position.coords.longitude;
+    }
+	function showError() { }
+    function initialize() 
+	{
+        var myLatlng = new google.maps.LatLng(27,41);
+        var mapOptions = { zoom: 4,  center: myLatlng  }
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        marker = new google.maps.Marker({ position: myLatlng, map: map, title: 'Hello World!',icon:'H.png' });
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+    //getLocation();
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>

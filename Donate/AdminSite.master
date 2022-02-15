@@ -1,0 +1,67 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="AdminSite.master.cs" Inherits="SiteMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head runat="server">
+    <title></title>
+    <link href="~/Styles/Site1.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .style1
+        {
+            color: #333333;
+            float:left;
+        }
+    </style>
+</head>
+<body>
+    <form runat="server">
+    <div class="page">
+        <div class="header">
+            <div class="title">
+             <img src="Bus.png" style=" border:'0px solid #cccccc';  margin: 2px 0px 0px 5px; "/>
+            </div>
+        
+            <div class="clear hideSkiplink">
+                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+                    <Items>
+                        <asp:MenuItem NavigateUrl="~/ADefault.aspx" Text="Signin"/>
+                        <asp:MenuItem NavigateUrl="~/ACenter.aspx" Text="Manage Center"/>
+                        <asp:MenuItem NavigateUrl="~/AAds.aspx" Text="Manage Ads"/>
+                        <asp:MenuItem NavigateUrl="~/ASignout.aspx" Text="Sign Out"/>
+                    </Items>
+                </asp:Menu>
+                </div>
+        </div>
+         <div class="">
+                <h3><font color=white> 
+                
+                <marquee style="color: #000000">
+                
+                <asp:Label ID="Label1" runat="server" Text=""></asp:Label></marquee>
+                
+                 </font></h3>
+        </div>
+        <div class="main">
+           
+
+
+
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+
+
+
+
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="footer">
+        All Right Are Saved 4 Our Group @ 2019
+
+    </div>
+    </form>
+    <br />
+</body>
+</html>
